@@ -30,3 +30,11 @@ See `BLOGGER-INTEGRATION.md` for the GitHub Pages + Blogger setup.
 - Reworked sidebar navigation hierarchy, page header, dashboard hero, metric cards, quick actions, data tables, form sections, controls and login screen.
 - Increased typography and input sizing for readability.
 - Preserved Firebase Authentication, Firestore collections, student/teacher forms and ID generation.
+
+## Classes & Sections module (v8)
+- Firestore collection: `classes`
+- Class names supported: Play, Nursery, KG, ১–১০
+- Section is optional (for example A/B/Morning/Day).
+- Grade ৯ and ১০ require exactly one group: বিজ্ঞান, মানবিক, or ব্যবসায় শিক্ষা.
+- Optional class teacher is selected from the `teachers` collection; subjects are comma-separated.
+- Includes create, list, search, edit, delete, duplicate prevention, and dashboard class count refresh.

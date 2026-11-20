@@ -31,7 +31,7 @@
         <a class="nav-link" href="#students" data-page="students"><span>♙</span><span data-i18n="students">শিক্ষার্থী</span></a>
         <a class="nav-link" href="#teachers" data-page="teachers"><span>♧</span><span data-i18n="teachers">শিক্ষক</span></a>
         <div class="nav-caption">ACADEMIC</div>
-        <a class="nav-link" href="#classes"><span>▤</span><span data-i18n="classes">ক্লাস ও সেকশন</span></a>
+        <a class="nav-link" href="#classes" data-page="classes"><span>▤</span><span data-i18n="classes">ক্লাস ও সেকশন</span></a>
         <a class="nav-link" href="#attendance"><span>✓</span><span data-i18n="attendance">উপস্থিতি</span></a>
         <a class="nav-link" href="#exams"><span>✎</span><span data-i18n="exams">পরীক্ষা ও ফলাফল</span></a>
         <a class="nav-link" href="#fees"><span>৳</span><span data-i18n="fees">বেতন ও ফি</span></a>
@@ -145,6 +145,23 @@
           </form>
         </div>
         <div class="panel table-panel"><div class="panel-heading"><div><h2>শিক্ষকের তালিকা</h2><p id="teacherListCount">লোড হচ্ছে...</p></div><button class="secondary-btn" id="refreshTeachers" type="button">↻ রিফ্রেশ</button></div><div class="table-wrap"><table class="data-table"><thead><tr><th>শিক্ষক আইডি</th><th>শিক্ষকের নাম</th><th>পদবি</th><th>বিষয়</th><th>মোবাইল</th><th>অবস্থা</th><th>কাজ</th></tr></thead><tbody id="teachersTableBody"><tr><td colspan="7" class="table-empty">তথ্য লোড হচ্ছে...</td></tr></tbody></table></div></div>
+      </section>
+
+      <section class="content page-section" id="classesPage" hidden>
+        <div class="welcome-row"><div><p class="eyebrow">ACADEMIC STRUCTURE</p><h1>ক্লাস ও সেকশন ব্যবস্থাপনা</h1><p class="muted">শ্রেণি, ঐচ্ছিক শাখা, নবম-দশমের বিভাগ ও শ্রেণিশিক্ষক পরিচালনা করুন।</p></div><button class="primary-btn" id="showClassForm">＋ নতুন শ্রেণি যোগ</button></div>
+        <div class="student-toolbar panel"><div class="student-search"><input id="classSearch" type="search" placeholder="শ্রেণি, শাখা, বিভাগ বা শিক্ষক দিয়ে খুঁজুন..."></div></div>
+        <div class="panel student-form-panel" id="classFormPanel" hidden>
+          <div class="panel-heading form-panel-heading"><div><span class="form-kicker">CLASS CONFIGURATION</span><h2 id="classFormTitle">নতুন শ্রেণি যোগ</h2><p>শাখা ঐচ্ছিক; নবম ও দশম শ্রেণিতে বিভাগ নির্বাচন করুন।</p></div><button class="icon-btn" id="closeClassForm" type="button">✕</button></div>
+          <form id="classForm" class="student-form"><input type="hidden" id="classDocId">
+            <label><span>শ্রেণি *</span><select id="className" required><option value="">শ্রেণি নির্বাচন করুন</option><option>Play</option><option>Nursery</option><option>KG</option><option>১</option><option>২</option><option>৩</option><option>৪</option><option>৫</option><option>৬</option><option>৭</option><option>৮</option><option>৯</option><option>১০</option></select></label>
+            <label><span>শাখা (ঐচ্ছিক)</span><input id="classSection" maxlength="40" placeholder="যেমন: A, B, Morning, Day"></label>
+            <label id="classGroupWrap" hidden><span>বিভাগ / Group *</span><select id="classGroup"><option value="">বিভাগ নির্বাচন করুন</option><option value="বিজ্ঞান">বিজ্ঞান (Science)</option><option value="মানবিক">মানবিক (Humanities)</option><option value="ব্যবসায় শিক্ষা">ব্যবসায় শিক্ষা (Business Studies)</option></select></label>
+            <label><span>শ্রেণিশিক্ষক (ঐচ্ছিক)</span><select id="classTeacher"><option value="">নির্বাচন করুন</option></select></label>
+            <label class="full-field"><span>বিষয়সমূহ (ঐচ্ছিক, কমা দিয়ে আলাদা করুন)</span><input id="classSubjects" placeholder="যেমন: বাংলা, ইংরেজি, গণিত"></label>
+            <div class="form-actions full-field"><button type="submit" class="primary-btn" id="saveClassBtn">শ্রেণি সংরক্ষণ</button><button type="button" class="secondary-btn" id="cancelClassBtn">বাতিল</button></div><p id="classFormMessage" class="form-message full-field" role="status"></p>
+          </form>
+        </div>
+        <div class="panel table-panel"><div class="panel-heading"><div><h2>শ্রেণির তালিকা</h2><p id="classListCount">লোড হচ্ছে...</p></div><button class="secondary-btn" id="refreshClasses" type="button">↻ রিফ্রেশ</button></div><div class="table-wrap"><table class="data-table"><thead><tr><th>শ্রেণি</th><th>শাখা</th><th>বিভাগ</th><th>শ্রেণিশিক্ষক</th><th>বিষয়সমূহ</th><th>কাজ</th></tr></thead><tbody id="classesTableBody"><tr><td colspan="6" class="table-empty">তথ্য লোড হচ্ছে...</td></tr></tbody></table></div></div>
       </section>
     </main>
   </div>
