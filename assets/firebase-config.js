@@ -1,6 +1,6 @@
 /* Firebase project configuration for SBAS */
 window.SBAS_FIREBASE_CONFIG = {
-  apiKey: "AIzaSyAQGgN5WD1WQdmZvIZo7SNMeiBbycKag",
+ apiKey: "AIzaSyAQdGgN5WD1WQdmZvIZo7SNMeiBbycKag",
   authDomain: "sbas-2bfe2.firebaseapp.com",
   projectId: "sbas-2bfe2",
   storageBucket: "sbas-2bfe2.firebasestorage.app",
