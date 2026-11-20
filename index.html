@@ -1,174 +1,20 @@
 <!doctype html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="School Management System">
-  <title>SBAS | School Administration</title>
-  <link rel="stylesheet" href="assets/style.css">
-</head>
-<body>
-  <section id="loginScreen" class="login-screen" hidden>
-    <form id="loginForm" class="login-card">
-      <div class="brand-mark">S</div>
-      <h1 data-login-bn="SBAS অ্যাডমিন লগইন" data-login-en="SBAS Admin Login">SBAS অ্যাডমিন লগইন</h1>
-      <p data-login-bn="আপনার অ্যাডমিন ইমেইল ও পাসওয়ার্ড দিয়ে প্রবেশ করুন" data-login-en="Sign in with your admin email and password">আপনার অ্যাডমিন ইমেইল ও পাসওয়ার্ড দিয়ে প্রবেশ করুন</p>
-      <label for="email">Email</label><input id="email" type="email" autocomplete="username" required>
-      <label for="password" data-login-bn="পাসওয়ার্ড" data-login-en="Password">পাসওয়ার্ড</label><input id="password" type="password" autocomplete="current-password" required>
-      <button type="submit" class="login-submit" data-login-bn="লগইন করুন" data-login-en="Sign in">লগইন করুন</button>
-      <p id="loginError" class="login-error" role="alert"></p>
-      <button type="button" id="loginLanguage" class="lang-btn">English</button>
-    </form>
-  </section>
-  <div class="app-shell">
-    <aside class="sidebar" id="sidebar">
-      <div class="brand">
-        <div class="brand-mark">S</div>
-        <div><strong data-i18n="schoolName">আমাদের স্কুল</strong><small>Management System</small></div>
-      </div>
-      <nav class="nav">
-        <a class="nav-link active" href="#dashboard" data-page="dashboard"><span>▦</span><span data-i18n="dashboard">ড্যাশবোর্ড</span></a>
-        <a class="nav-link" href="#students" data-page="students"><span>♙</span><span data-i18n="students">শিক্ষার্থী</span></a>
-        <a class="nav-link" href="#teachers" data-page="teachers"><span>♧</span><span data-i18n="teachers">শিক্ষক</span></a>
-        <div class="nav-caption">ACADEMIC</div>
-        <a class="nav-link" href="#classes" data-page="classes"><span>▤</span><span data-i18n="classes">ক্লাস ও সেকশন</span></a>
-        <a class="nav-link" href="#attendance"><span>✓</span><span data-i18n="attendance">উপস্থিতি</span></a>
-        <a class="nav-link" href="#exams"><span>✎</span><span data-i18n="exams">পরীক্ষা ও ফলাফল</span></a>
-        <a class="nav-link" href="#fees"><span>৳</span><span data-i18n="fees">বেতন ও ফি</span></a>
-        <a class="nav-link" href="#notices"><span>▣</span><span data-i18n="notices">নোটিশ</span></a>
-        <a class="nav-link" href="#reports"><span>▥</span><span data-i18n="reports">রিপোর্ট</span></a>
-        <div class="nav-caption">ADMINISTRATION</div>
-        <a class="nav-link" href="#settings"><span>⚙</span><span data-i18n="settings">সেটিংস</span></a>
-      </nav>
-      <div class="sidebar-foot"><span class="status-dot"></span><span data-i18n="demoMode">ডেমো মোড</span></div>
-    </aside>
-
-    <main class="main">
-      <header class="topbar">
-        <button class="icon-btn mobile-menu" id="menuBtn" aria-label="Open menu">☰</button>
-        <div class="breadcrumb"><span class="breadcrumb-mark">SBAS</span><span class="muted"> / </span><strong data-i18n="overview">সংক্ষিপ্ত বিবরণ</strong></div>
-        <div class="top-actions">
-          <button class="lang-btn" id="languageBtn" type="button">English</button>
-          <button class="avatar" id="logoutBtn" title="Logout">A</button>
-        </div>
-      </header>
-
-      <section class="content" id="dashboard">
-        <div class="welcome-row">
-          <div>
-            <p class="eyebrow" data-i18n="overviewLabel">SCHOOL OVERVIEW</p>
-            <h1 data-i18n="welcome">স্বাগতম, অ্যাডমিন!</h1>
-            <p class="muted" data-i18n="welcomeSub">আপনার প্রতিষ্ঠানের আজকের সারসংক্ষেপ এখানে দেখুন।</p>
-          </div>
-          <div class="date-chip" id="todayDate"></div>
-        </div>
-
-        <div class="notice-banner">
-          <div class="notice-icon">i</div>
-          <div><strong data-i18n="demoTitle">এটি প্রাথমিক ডেমো ড্যাশবোর্ড</strong><p data-i18n="demoText">এখানে দেখানো সংখ্যা নমুনা। Firebase সংযুক্ত হলে প্রকৃত তথ্য দেখানো হবে।</p></div>
-        </div>
-
-        <div class="stats-grid">
-          <article class="stat-card"><div class="stat-top"><span data-i18n="totalStudents">মোট শিক্ষার্থী</span><span class="stat-icon blue">♙</span></div><strong id="studentCount">—</strong><small data-i18n="sampleData">নমুনা তথ্য</small></article>
-          <article class="stat-card"><div class="stat-top"><span data-i18n="totalTeachers">মোট শিক্ষক</span><span class="stat-icon purple">♧</span></div><strong id="teacherCount">—</strong><small data-i18n="sampleData">নমুনা তথ্য</small></article>
-          <article class="stat-card"><div class="stat-top"><span data-i18n="totalClasses">মোট ক্লাস</span><span class="stat-icon green">▤</span></div><strong id="classCount">—</strong><small data-i18n="sampleData">নমুনা তথ্য</small></article>
-          <article class="stat-card"><div class="stat-top"><span data-i18n="todayAttendance">আজকের উপস্থিতি</span><span class="stat-icon orange">✓</span></div><strong>৯৪%</strong><small data-i18n="sampleData">নমুনা তথ্য</small></article>
-        </div>
-
-        <div class="section-grid">
-          <article class="panel">
-            <div class="panel-heading"><div><h2 data-i18n="quickActions">দ্রুত কাজ</h2><p data-i18n="quickSub">প্রয়োজনীয় কাজের শর্টকাট</p></div></div>
-            <div class="quick-grid">
-              <button class="quick-action" id="quickAddStudent"><span>＋</span><b data-i18n="addStudent">শিক্ষার্থী যোগ</b></button>
-              <button class="quick-action" id="quickAddTeacher"><span>♧</span><b data-i18n="addTeacher">শিক্ষক যোগ</b></button>
-              <button class="quick-action"><span>✓</span><b data-i18n="takeAttendance">উপস্থিতি নিন</b></button>
-              <button class="quick-action"><span>▣</span><b data-i18n="publishNotice">নোটিশ প্রকাশ</b></button>
-            </div>
-          </article>
-          <article class="panel">
-            <div class="panel-heading"><div><h2 data-i18n="recentActivity">সাম্প্রতিক কার্যক্রম</h2><p data-i18n="activitySub">সিস্টেমের সাম্প্রতিক আপডেট</p></div></div>
-            <div class="empty-state"><span>◷</span><p data-i18n="noActivity">এখনো কোনো কার্যক্রম নেই।</p></div>
-          </article>
-        </div>
-        <footer data-i18n="footer">School Management System · প্রাথমিক সংস্করণ</footer>
-      </section>
-
-      <section class="content page-section" id="studentsPage" hidden>
-        <div class="welcome-row">
-          <div><p class="eyebrow">STUDENT MANAGEMENT</p><h1 data-student-text="title">শিক্ষার্থী ব্যবস্থাপনা</h1><p class="muted" data-student-text="subtitle">নতুন শিক্ষার্থী ভর্তি, তথ্য সম্পাদনা ও তালিকা পরিচালনা করুন।</p></div>
-          <button class="primary-btn" id="showStudentForm">＋ <span data-student-text="add">নতুন শিক্ষার্থী</span></button>
-        </div>
-        <div class="student-toolbar panel"><div class="student-search"><input id="studentSearch" type="search" placeholder="নাম, আইডি, রোল বা এনআইডি দিয়ে খুঁজুন..."></div><select id="studentClassFilter" aria-label="Filter by class"><option value="">সকল শ্রেণি</option><option>Play</option><option>Nursery</option><option>KG</option><option>১</option><option>২</option><option>৩</option><option>৪</option><option>৫</option><option>৬</option><option>৭</option><option>৮</option><option>৯</option><option>১০</option></select></div>
-        <div class="panel student-form-panel" id="studentFormPanel" hidden>
-          <div class="panel-heading form-panel-heading"><div><span class="form-kicker">STUDENT PROFILE</span><h2 id="studentFormTitle">নতুন শিক্ষার্থী ভর্তি</h2><p>শিক্ষার্থীর প্রয়োজনীয় তথ্যগুলো পূরণ করুন</p></div><button class="icon-btn" id="closeStudentForm" type="button">✕</button></div>
-          <form id="studentForm" class="student-form">
-            <input type="hidden" id="studentDocId">
-            <div class="form-section-title"><span class="form-section-icon student-icon">01</span><div><strong>শিক্ষার্থীর পরিচিতি</strong><small>Student information</small></div></div>
-            <label class="id-field"><span>স্টুডেন্ট আইডি</span><input id="studentId" readonly placeholder="অটো তৈরি হবে"><small>সিস্টেম থেকে স্বয়ংক্রিয়ভাবে তৈরি হবে</small></label>
-            <label><span>নাম (বাংলা) *</span><input id="studentNameBn" required maxlength="100" placeholder="শিক্ষার্থীর বাংলা নাম"></label>
-            <label><span>Name (English)</span><input id="studentNameEn" maxlength="100" placeholder="Student full name"></label>
-            <label><span>ক্লাস *</span><select id="studentClass" required><option value="">ক্লাস নির্বাচন করুন</option><option>Play</option><option>Nursery</option><option>KG</option><option>১</option><option>২</option><option>৩</option><option>৪</option><option>৫</option><option>৬</option><option>৭</option><option>৮</option><option>৯</option><option>১০</option></select></label>
-            <label><span>ক্লাস রোল *</span><input id="studentRoll" required maxlength="20" placeholder="যেমন: ০১"></label>
-            <label><span>এনআইডি / জন্ম নিবন্ধন নম্বর</span><input id="studentIdentity" maxlength="30" placeholder="পরিচয়পত্র নম্বর"></label>
-            <label><span>জন্ম তারিখ</span><input id="studentDob" type="date"></label>
-            <div class="form-section-title"><span class="form-section-icon family-icon">02</span><div><strong>পারিবারিক তথ্য</strong><small>Parent / Guardian information</small></div></div>
-            <label><span>বাবার নাম (বাংলা)</span><input id="fatherNameBn" maxlength="100"></label>
-            <label><span>Father's Name (English)</span><input id="fatherNameEn" maxlength="100"></label>
-            <label><span>মায়ের নাম (বাংলা)</span><input id="motherNameBn" maxlength="100"></label>
-            <label><span>Mother's Name (English)</span><input id="motherNameEn" maxlength="100"></label>
-            <div class="form-section-title"><span class="form-section-icon address-icon">03</span><div><strong>ঠিকানা</strong><small>Permanent address</small></div></div>
-            <label><span>গ্রাম</span><input id="village" maxlength="100"></label><label><span>ডাকঘর</span><input id="postOffice" maxlength="100"></label><label><span>থানা / উপজেলা</span><input id="upazila" maxlength="100"></label><label><span>জেলা</span><input id="district" maxlength="100"></label>
-            <label><span>অভিভাবকের মোবাইল</span><input id="guardianPhone" type="tel" maxlength="20" inputmode="tel"></label>
-            <label><span>অবস্থা</span><select id="studentStatus"><option value="active">সক্রিয়</option><option value="inactive">নিষ্ক্রিয়</option></select></label>
-            <div class="form-actions full-field"><button type="submit" class="primary-btn" id="saveStudentBtn">শিক্ষার্থী সংরক্ষণ</button><button type="button" class="secondary-btn" id="cancelStudentBtn">বাতিল</button></div><p id="studentFormMessage" class="form-message full-field" role="status"></p>
-          </form>
-        </div>
-        <div class="panel table-panel"><div class="panel-heading"><div><h2>শিক্ষার্থীর তালিকা</h2><p id="studentListCount">লোড হচ্ছে...</p></div><button class="secondary-btn" id="refreshStudents" type="button">↻ রিফ্রেশ</button></div><div class="table-wrap"><table class="data-table"><thead><tr><th>স্টুডেন্ট আইডি</th><th>শিক্ষার্থীর নাম</th><th>ক্লাস</th><th>রোল</th><th>এনআইডি / জন্ম নিবন্ধন</th><th>অবস্থা</th><th>কাজ</th></tr></thead><tbody id="studentsTableBody"><tr><td colspan="7" class="table-empty">তথ্য লোড হচ্ছে...</td></tr></tbody></table></div></div>
-      </section>
-
-      <section class="content page-section" id="teachersPage" hidden>
-        <div class="welcome-row"><div><p class="eyebrow">TEACHER MANAGEMENT</p><h1>শিক্ষক ব্যবস্থাপনা</h1><p class="muted">শিক্ষকের তথ্য যোগ, সম্পাদনা ও তালিকা পরিচালনা করুন।</p></div><button class="primary-btn" id="showTeacherForm">＋ নতুন শিক্ষক</button></div>
-        <div class="student-toolbar panel"><div class="student-search"><input id="teacherSearch" type="search" placeholder="নাম, শিক্ষক আইডি, পদবি বা মোবাইল দিয়ে খুঁজুন..."></div></div>
-        <div class="panel student-form-panel" id="teacherFormPanel" hidden><div class="panel-heading form-panel-heading"><div><span class="form-kicker">TEACHER PROFILE</span><h2 id="teacherFormTitle">নতুন শিক্ষক যোগ</h2><p>শিক্ষকের প্রয়োজনীয় তথ্যগুলো পূরণ করুন</p></div><button class="icon-btn" id="closeTeacherForm" type="button">✕</button></div>
-          <form id="teacherForm" class="student-form"><input type="hidden" id="teacherDocId">
-            <div class="form-section-title"><span class="form-section-icon teacher-icon">01</span><div><strong>শিক্ষকের পরিচিতি</strong><small>Personal information</small></div></div>
-            <label class="id-field"><span>শিক্ষক আইডি</span><input id="teacherId" readonly placeholder="অটো তৈরি হবে"><small>সিস্টেম থেকে স্বয়ংক্রিয়ভাবে তৈরি হবে</small></label>
-            <label><span>নাম (বাংলা) *</span><input id="teacherNameBn" required maxlength="100"></label><label><span>Name (English)</span><input id="teacherNameEn" maxlength="100"></label>
-            <label><span>লিঙ্গ</span><select id="teacherGender"><option value="">নির্বাচন করুন</option><option value="male">পুরুষ</option><option value="female">নারী</option><option value="other">অন্যান্য</option></select></label><label><span>এনআইডি নম্বর</span><input id="teacherNid" maxlength="30"></label><label><span>জন্ম তারিখ</span><input id="teacherDob" type="date"></label>
-            <div class="form-section-title"><span class="form-section-icon family-icon">02</span><div><strong>পারিবারিক তথ্য</strong><small>Family information</small></div></div>
-            <label><span>বাবার নাম (বাংলা)</span><input id="teacherFatherBn"></label><label><span>Father's Name (English)</span><input id="teacherFatherEn"></label><label><span>মায়ের নাম (বাংলা)</span><input id="teacherMotherBn"></label><label><span>Mother's Name (English)</span><input id="teacherMotherEn"></label>
-            <div class="form-section-title"><span class="form-section-icon work-icon">03</span><div><strong>চাকরি সংক্রান্ত তথ্য</strong><small>Employment information</small></div></div>
-            <label><span>পদবি / Designation *</span><input id="teacherDesignation" required placeholder="যেমন: সহকারী শিক্ষক"></label><label><span>বিষয়</span><input id="teacherSubject" placeholder="যেমন: গণিত"></label><label><span>শিক্ষাগত যোগ্যতা</span><input id="teacherEducation" placeholder="যেমন: B.A. / M.A."></label><label><span>যোগদানের তারিখ</span><input id="teacherJoiningDate" type="date"></label>
-            <div class="form-section-title"><span class="form-section-icon address-icon">04</span><div><strong>যোগাযোগ ও ঠিকানা</strong><small>Contact & address</small></div></div>
-            <label><span>মোবাইল নম্বর *</span><input id="teacherPhone" type="tel" required maxlength="20"></label><label><span>ইমেইল</span><input id="teacherEmail" type="email"></label><label><span>গ্রাম</span><input id="teacherVillage"></label><label><span>ডাকঘর</span><input id="teacherPostOffice"></label><label><span>থানা / উপজেলা</span><input id="teacherUpazila"></label><label><span>জেলা</span><input id="teacherDistrict"></label><label><span>অবস্থা</span><select id="teacherStatus"><option value="active">কর্মরত</option><option value="inactive">কর্মরত নন</option></select></label>
-            <div class="form-actions full-field"><button type="submit" class="primary-btn" id="saveTeacherBtn">শিক্ষক সংরক্ষণ</button><button type="button" class="secondary-btn" id="cancelTeacherBtn">বাতিল</button></div><p id="teacherFormMessage" class="form-message full-field" role="status"></p>
-          </form>
-        </div>
-        <div class="panel table-panel"><div class="panel-heading"><div><h2>শিক্ষকের তালিকা</h2><p id="teacherListCount">লোড হচ্ছে...</p></div><button class="secondary-btn" id="refreshTeachers" type="button">↻ রিফ্রেশ</button></div><div class="table-wrap"><table class="data-table"><thead><tr><th>শিক্ষক আইডি</th><th>শিক্ষকের নাম</th><th>পদবি</th><th>বিষয়</th><th>মোবাইল</th><th>অবস্থা</th><th>কাজ</th></tr></thead><tbody id="teachersTableBody"><tr><td colspan="7" class="table-empty">তথ্য লোড হচ্ছে...</td></tr></tbody></table></div></div>
-      </section>
-
-      <section class="content page-section" id="classesPage" hidden>
-        <div class="welcome-row"><div><p class="eyebrow">ACADEMIC STRUCTURE</p><h1>ক্লাস ও সেকশন ব্যবস্থাপনা</h1><p class="muted">শ্রেণি, ঐচ্ছিক শাখা, নবম-দশমের বিভাগ ও শ্রেণিশিক্ষক পরিচালনা করুন।</p></div><button class="primary-btn" id="showClassForm">＋ নতুন শ্রেণি যোগ</button></div>
-        <div class="student-toolbar panel"><div class="student-search"><input id="classSearch" type="search" placeholder="শ্রেণি, শাখা, বিভাগ বা শিক্ষক দিয়ে খুঁজুন..."></div></div>
-        <div class="panel student-form-panel" id="classFormPanel" hidden>
-          <div class="panel-heading form-panel-heading"><div><span class="form-kicker">CLASS CONFIGURATION</span><h2 id="classFormTitle">নতুন শ্রেণি যোগ</h2><p>শাখা ঐচ্ছিক; নবম ও দশম শ্রেণিতে বিভাগ নির্বাচন করুন।</p></div><button class="icon-btn" id="closeClassForm" type="button">✕</button></div>
-          <form id="classForm" class="student-form"><input type="hidden" id="classDocId">
-            <label><span>শ্রেণি *</span><select id="className" required><option value="">শ্রেণি নির্বাচন করুন</option><option>Play</option><option>Nursery</option><option>KG</option><option>১</option><option>২</option><option>৩</option><option>৪</option><option>৫</option><option>৬</option><option>৭</option><option>৮</option><option>৯</option><option>১০</option></select></label>
-            <label><span>শাখা (ঐচ্ছিক)</span><input id="classSection" maxlength="40" placeholder="যেমন: A, B, Morning, Day"></label>
-            <label id="classGroupWrap" hidden><span>বিভাগ / Group *</span><select id="classGroup"><option value="">বিভাগ নির্বাচন করুন</option><option value="বিজ্ঞান">বিজ্ঞান (Science)</option><option value="মানবিক">মানবিক (Humanities)</option><option value="ব্যবসায় শিক্ষা">ব্যবসায় শিক্ষা (Business Studies)</option></select></label>
-            <label><span>শ্রেণিশিক্ষক (ঐচ্ছিক)</span><select id="classTeacher"><option value="">নির্বাচন করুন</option></select></label>
-            <label class="full-field"><span>বিষয়সমূহ (ঐচ্ছিক, কমা দিয়ে আলাদা করুন)</span><input id="classSubjects" placeholder="যেমন: বাংলা, ইংরেজি, গণিত"></label>
-            <div class="form-actions full-field"><button type="submit" class="primary-btn" id="saveClassBtn">শ্রেণি সংরক্ষণ</button><button type="button" class="secondary-btn" id="cancelClassBtn">বাতিল</button></div><p id="classFormMessage" class="form-message full-field" role="status"></p>
-          </form>
-        </div>
-        <div class="panel table-panel"><div class="panel-heading"><div><h2>শ্রেণির তালিকা</h2><p id="classListCount">লোড হচ্ছে...</p></div><button class="secondary-btn" id="refreshClasses" type="button">↻ রিফ্রেশ</button></div><div class="table-wrap"><table class="data-table"><thead><tr><th>শ্রেণি</th><th>শাখা</th><th>বিভাগ</th><th>শ্রেণিশিক্ষক</th><th>বিষয়সমূহ</th><th>কাজ</th></tr></thead><tbody id="classesTableBody"><tr><td colspan="6" class="table-empty">তথ্য লোড হচ্ছে...</td></tr></tbody></table></div></div>
-      </section>
-    </main>
-  </div>
-  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script src="assets/firebase-config.js"></script>
-  <script src="assets/app.js"></script>
-</body>
-</html>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102a43"><title>SBAS | School Management</title><link rel="stylesheet" href="assets/style.css">
+</head><body>
+<section id="loginScreen" class="login-screen"><form id="loginForm" class="login-card"><div class="brand-mark">S</div><p class="eyebrow">SONAR BANGLA ADARSHO SCHOOL</p><h1 data-bn="অ্যাডমিন লগইন" data-en="Administrator Login">অ্যাডমিন লগইন</h1><p class="muted" data-bn="আপনার অনুমোদিত অ্যাডমিন অ্যাকাউন্ট দিয়ে প্রবেশ করুন" data-en="Sign in with your authorized administrator account">আপনার অনুমোদিত অ্যাডমিন অ্যাকাউন্ট দিয়ে প্রবেশ করুন</p><label>Email<input id="email" type="email" autocomplete="username" required></label><label data-bn="পাসওয়ার্ড" data-en="Password">পাসওয়ার্ড<input id="password" type="password" autocomplete="current-password" required></label><button class="primary" type="submit">Sign in / লগইন</button><p id="loginError" class="error" role="alert"></p><button id="loginLang" class="text-btn" type="button">English</button></form></section>
+<div id="app" class="app" hidden><aside class="sidebar" id="sidebar"><div class="brand"><div class="brand-mark">S</div><div><b id="schoolBrand">SBAS</b><small>School Management</small></div></div><div class="nav-label">MAIN MENU</div><nav id="nav"><button class="nav-item active" data-page="dashboard">▦ <span data-bn="ড্যাশবোর্ড" data-en="Dashboard">ড্যাশবোর্ড</span></button><button class="nav-item" data-page="students">♙ <span data-bn="শিক্ষার্থী" data-en="Students">শিক্ষার্থী</span></button><button class="nav-item" data-page="teachers">♧ <span data-bn="শিক্ষক" data-en="Teachers">শিক্ষক</span></button><div class="nav-label">ACADEMIC</div><button class="nav-item" data-page="classes">▤ <span data-bn="ক্লাস ও বিষয়" data-en="Classes & Subjects">ক্লাস ও বিষয়</span></button><button class="nav-item" data-page="attendance">✓ <span data-bn="উপস্থিতি" data-en="Attendance">উপস্থিতি</span></button><button class="nav-item" data-page="exams">✎ <span data-bn="পরীক্ষা ও ফলাফল" data-en="Exams & Results">পরীক্ষা ও ফলাফল</span></button><button class="nav-item" data-page="fees">৳ <span data-bn="বেতন ও পেমেন্ট" data-en="Fees & Payments">বেতন ও পেমেন্ট</span></button><div class="nav-label">COMMUNICATION</div><button class="nav-item" data-page="notices">▣ <span data-bn="নোটিশ" data-en="Notices">নোটিশ</span></button><button class="nav-item" data-page="reports">▥ <span data-bn="রিপোর্ট" data-en="Reports">রিপোর্ট</span></button><button class="nav-item" data-page="settings">⚙ <span data-bn="সেটিংস" data-en="Settings">সেটিংস</span></button></nav><div class="sidebar-bottom"><span class="live-dot"></span> Firebase Connected</div></aside>
+<main class="main"><header class="topbar"><button id="menuBtn" class="icon-btn">☰</button><div><b id="pageTitle">ড্যাশবোর্ড</b><small> / SBAS Administration</small></div><div class="top-actions"><button id="langBtn" class="outline-btn">English</button><span class="admin-chip">ADMIN</span><button id="logoutBtn" class="avatar" title="Logout">A</button></div></header><div id="toast" class="toast" role="status"></div>
+<section class="page active" id="page-dashboard"><div class="page-head"><div><p class="eyebrow">SCHOOL OVERVIEW</p><h1 data-bn="স্বাগতম, অ্যাডমিন!" data-en="Welcome, Administrator!">স্বাগতম, অ্যাডমিন!</h1><p class="muted" data-bn="আপনার প্রতিষ্ঠানের সার্বিক কার্যক্রম এক জায়গায় পরিচালনা করুন।" data-en="Manage your school's daily operations from one place.">আপনার প্রতিষ্ঠানের সার্বিক কার্যক্রম এক জায়গায় পরিচালনা করুন।</p></div><div class="date-pill" id="today"></div></div><div class="stats" id="stats"><article class="stat"><span>শিক্ষার্থী / Students</span><b id="statStudents">—</b><small>Registered records</small></article><article class="stat"><span>শিক্ষক / Teachers</span><b id="statTeachers">—</b><small>Staff records</small></article><article class="stat"><span>ক্লাস / Classes</span><b id="statClasses">—</b><small>Class groups</small></article><article class="stat"><span>আজ উপস্থিত / Present today</span><b id="statAttendance">—</b><small>Attendance records</small></article></div><div class="grid-two"><article class="panel"><div class="panel-head"><div><h2>দ্রুত কাজ / Quick actions</h2><p>এক ক্লিকে প্রয়োজনীয় কাজ শুরু করুন</p></div></div><div class="quick-actions"><button data-go="students" data-action="add">＋ শিক্ষার্থী যোগ</button><button data-go="teachers" data-action="add">＋ শিক্ষক যোগ</button><button data-go="attendance">✓ উপস্থিতি নিন</button><button data-go="notices" data-action="add">▣ নোটিশ প্রকাশ</button></div></article><article class="panel"><div class="panel-head"><div><h2>সাম্প্রতিক নোটিশ / Latest notices</h2><p>সর্বশেষ প্রকাশিত বিজ্ঞপ্তি</p></div><button class="text-btn" data-go="notices">সব দেখুন →</button></div><div id="recentNotices" class="recent-list">লোড হচ্ছে...</div></article></div><article class="panel"><div class="panel-head"><div><h2>সিস্টেম অবস্থা / System status</h2><p>Firebase সংযোগ ও ডেটা স্টোরেজ</p></div><span class="status-good">● Connected</span></div><p class="muted">আপনার ডেটা Firebase Firestore-এ সংরক্ষিত হচ্ছে। নিয়মিত ব্যাকআপ রাখুন।</p></article></section>
+<section class="page" id="page-students"><div class="page-head"><div><p class="eyebrow">STUDENT DIRECTORY</p><h1>শিক্ষার্থী ব্যবস্থাপনা</h1><p class="muted">ভর্তি, প্রোফাইল, শ্রেণি পরিবর্তন ও শিক্ষার্থীর তথ্য পরিচালনা।</p></div><button class="primary" data-add="students">＋ নতুন শিক্ষার্থী</button></div><div id="studentsMount"></div></section>
+<section class="page" id="page-teachers"><div class="page-head"><div><p class="eyebrow">STAFF DIRECTORY</p><h1>শিক্ষক ব্যবস্থাপনা</h1><p class="muted">শিক্ষক-কর্মচারীর তথ্য ও দায়িত্ব পরিচালনা।</p></div><button class="primary" data-add="teachers">＋ নতুন শিক্ষক</button></div><div id="teachersMount"></div></section>
+<section class="page" id="page-classes"><div class="page-head"><div><p class="eyebrow">ACADEMIC STRUCTURE</p><h1>ক্লাস, শাখা ও বিষয়</h1><p class="muted">প্রতিটি শ্রেণির নিজস্ব বিষয় তালিকা; শাখা ঐচ্ছিক। নবম-দশমে বিভাগ নির্ধারণ করুন।</p></div><button class="primary" data-add="classes">＋ ক্লাস যোগ</button></div><div id="classesMount"></div></section>
+<section class="page" id="page-attendance"><div class="page-head"><div><p class="eyebrow">DAILY ATTENDANCE</p><h1>দৈনিক উপস্থিতি</h1><p class="muted">তারিখ, শ্রেণি ও শাখা অনুযায়ী উপস্থিতি সংরক্ষণ করুন।</p></div></div><div id="attendanceMount"></div></section>
+<section class="page" id="page-exams"><div class="page-head"><div><p class="eyebrow">ASSESSMENT</p><h1>পরীক্ষা ও ফলাফল</h1><p class="muted">পরীক্ষা তৈরি, বিষয়ভিত্তিক নম্বর এবং ফলাফল সংরক্ষণ।</p></div><button class="primary" data-add="exams">＋ পরীক্ষা তৈরি</button></div><div id="examsMount"></div></section>
+<section class="page" id="page-fees"><div class="page-head"><div><p class="eyebrow">FINANCE</p><h1>বেতন ও পেমেন্ট</h1><p class="muted">ফি নির্ধারণ, শিক্ষার্থীর পেমেন্ট এবং বকেয়া হিসাব।</p></div><button class="primary" data-add="fees">＋ পেমেন্ট নথিভুক্ত</button></div><div id="feesMount"></div></section>
+<section class="page" id="page-notices"><div class="page-head"><div><p class="eyebrow">ANNOUNCEMENTS</p><h1>নোটিশ বোর্ড</h1><p class="muted">প্রতিষ্ঠানের বিজ্ঞপ্তি তৈরি, সম্পাদনা ও প্রকাশ।</p></div><button class="primary" data-add="notices">＋ নতুন নোটিশ</button></div><div id="noticesMount"></div></section>
+<section class="page" id="page-reports"><div class="page-head"><div><p class="eyebrow">ANALYTICS & EXPORT</p><h1>রিপোর্ট</h1><p class="muted">শিক্ষার্থী, শিক্ষক, উপস্থিতি, ফলাফল ও পেমেন্টের সারসংক্ষেপ।</p></div><button class="outline-btn" id="exportReport">↓ CSV Export</button></div><div id="reportsMount"></div></section>
+<section class="page" id="page-settings"><div class="page-head"><div><p class="eyebrow">CONFIGURATION</p><h1>প্রতিষ্ঠানের সেটিংস</h1><p class="muted">প্রতিষ্ঠানের নাম, যোগাযোগ, শিক্ষাবর্ষ ও গ্রেডিং স্কেল।</p></div></div><div id="settingsMount"></div></section>
+<footer class="footer">SBAS School Management System · Secure administration workspace</footer></main></div>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script><script src="assets/firebase-config.js"></script><script src="assets/app.js"></script></body></html>

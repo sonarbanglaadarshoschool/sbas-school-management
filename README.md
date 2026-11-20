@@ -1,40 +1,43 @@
-# SBAS — School Management System
+# SBAS Complete School Management Dashboard v9
 
-Bilingual (Bangla + English) school management starter using HTML, CSS, Vanilla JavaScript and Firebase.
+A bilingual-ready (Bangla-first) school administration dashboard using HTML, CSS, vanilla JavaScript, Firebase Authentication and Cloud Firestore.
 
-## Included
-- Firebase email/password admin login
-- Firestore-backed student add, edit, delete, search and class filter
-- Completely redesigned responsive admin workspace (new layout, navigation, cards, forms, tables and login screen)
-- GitHub Pages deployment notes
-- Blogger integration instructions and embed snippet
+## Included modules
+- Admin login and role/status verification (`users/{uid}` must have `role: admin` and `status: active`)
+- Dashboard live counts and latest notices
+- Students: add, edit, delete, search, auto IDs (`ST0001` onward)
+- Teachers: add, edit, delete, search, auto IDs (`TC001` onward)
+- Classes & Sections: optional section, class teacher, class-specific subjects, optional group; Grades 9 and 10 support Science, Humanities and Business Studies
+- Attendance: date/class/section filtered present, absent, late and leave records
+- Exams: create/edit/delete exam records, class-subject selection, enter/update marks and calculate percentage/letter grade
+- Fees & Payments: record/edit/delete payment transactions and receipt numbers
+- Notices: create/edit/delete, publish or draft
+- Reports: live counts and CSV export
+- Settings: school profile, contact details, academic year and grading note
 
-## Run locally
-Open this folder in VS Code and use Live Server on `index.html`.
+## Deploy/update using GitHub web upload
+1. Download and extract the ZIP.
+2. Open the extracted `school-management-starter` folder (the project root in this ZIP).
+3. Open your GitHub repository's **Add file → Upload files** page.
+4. Select all files and folders inside this project folder, including `index.html`, `assets`, `firestore.rules`, and docs. Do not upload the ZIP itself and do not upload an extra parent folder.
+5. Drop the files into GitHub. Commit with message `Deploy SBAS complete dashboard v9`.
+6. If GitHub asks to replace files, accept. Keep the existing repository's `main` branch.
+7. Wait for GitHub Pages to deploy, then hard-refresh the website (Ctrl+F5).
 
-## Firebase
-Check `assets/firebase-config.js` and configure Firestore Security Rules before production use. Do not use permissive public rules.
+## Firebase requirements
+- Firebase project config is in `assets/firebase-config.js`.
+- Authentication: Email/Password provider enabled.
+- Firestore: create database in production mode.
+- Admin document: `users/{AUTH_UID}` with fields `role: "admin"`, `status: "active"`, and optional `name`.
+- Add the GitHub Pages hostname to Authentication → Settings → Authorized domains.
+- Publish the included `firestore.rules` in Firestore → Rules. These rules intentionally restrict all app data to active admins.
 
-## Deployment
-See `BLOGGER-INTEGRATION.md` for the GitHub Pages + Blogger setup.
+## Collections used
+`users`, `students`, `teachers`, `classes`, `attendance`, `exams`, `results`, `fees`, `notices`, `settings`, `systemCounters`.
 
-
-## Student & Teacher Records (Updated)
-- Student IDs are generated automatically as ST0001, ST0002, ... using Firestore transactions.
-- Teacher IDs are generated automatically as TC001, TC002, ... using Firestore transactions.
-- Student and teacher profiles include bilingual names, family, identity, contact, and address fields.
-- Firestore collections: `students`, `teachers`, and `systemCounters`.
-
-## Theme refresh v7
-- Rebuilt the visual system around a clean school ERP workspace layout.
-- Reworked sidebar navigation hierarchy, page header, dashboard hero, metric cards, quick actions, data tables, form sections, controls and login screen.
-- Increased typography and input sizing for readability.
-- Preserved Firebase Authentication, Firestore collections, student/teacher forms and ID generation.
-
-## Classes & Sections module (v8)
-- Firestore collection: `classes`
-- Class names supported: Play, Nursery, KG, ১–১০
-- Section is optional (for example A/B/Morning/Day).
-- Grade ৯ and ১০ require exactly one group: বিজ্ঞান, মানবিক, or ব্যবসায় শিক্ষা.
-- Optional class teacher is selected from the `teachers` collection; subjects are comma-separated.
-- Includes create, list, search, edit, delete, duplicate prevention, and dashboard class count refresh.
+## Important notes
+- This is an operational starter dashboard, not a payment gateway. Payment entries are manual records; it does not process money.
+- The attendance module stores one document per date/class/student. If a student belongs to a section, keep the section value consistent between the student and class records.
+- Class-specific subjects are stored as an array on each `classes` document. Exams can select subjects from that class list.
+- Test with dummy records before entering live student data. Keep regular Firestore backups. Never share admin passwords.
+- Firestore rules are admin-only. Do not make the database public to fix permission errors.
